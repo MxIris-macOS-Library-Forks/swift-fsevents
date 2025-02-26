@@ -1,18 +1,9 @@
-//
-//  FSDeviceEventStreamInterface.swift
-//  RDFSEvents
-//
-//  Created by Roman Dzieciol on 3/30/19.
-//
-
 import Foundation
 import CoreFoundation
 import CoreServices.FSEvents
 
-
 @available(OSX 10.13, *)
 public protocol FSDeviceEventStreamInterface: FSEventStreamInterface {
-
     var device: dev_t { get }
 
     /// Gets the UUID associated with a device, or NULL if not possible
@@ -48,13 +39,12 @@ public protocol FSDeviceEventStreamInterface: FSEventStreamInterface {
     ///   seconds since Jan 1, 1970 (i.e. a posix style time_t).
     /// - Returns: The last event ID for the given device that was returned
     ///   before the given time.
-    func lastEventId(beforeTime: CFAbsoluteTime) -> FSEventStream.EventId
+    func lastEventId(beforeTime: CFAbsoluteTime) -> FSEventStream.EventID
 
     /// Purges old events from the persistent per-volume database
     /// maintained by the service. Can only be called by the root user.
     ///
     /// - Parameter eventId: The event ID.
     /// - Returns: True if it succeeds, otherwise False if it fails.
-    func purgeEvents(upTo eventId: FSEventStream.EventId) -> Bool
-
+    func purgeEvents(upTo eventId: FSEventStream.EventID) -> Bool
 }

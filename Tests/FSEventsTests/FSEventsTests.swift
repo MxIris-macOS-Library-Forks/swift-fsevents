@@ -1,8 +1,8 @@
 import XCTest
-import RDFSEvents
+@testable import FSEvents
 
 @available(OSX 10.13, *)
-final class RDFSEventsTests: XCTestCase {
+final class FSEventsTests: XCTestCase {
 
     func testCreation() {
 
@@ -12,7 +12,7 @@ final class RDFSEventsTests: XCTestCase {
 
         try! FileManager.default.createDirectory(at: tmpURL, withIntermediateDirectories: true, attributes: nil)
 
-        var receivedEvents: [FSEventStream.CallbackEvent] = []
+        var receivedEvents: [FSEvent] = []
 
         guard let eventStream = FSEventStream.forHost(
             pathsToWatch: [tmpURL.path],
@@ -35,7 +35,7 @@ final class RDFSEventsTests: XCTestCase {
 
         wait(for: [waitForEvents], timeout: 1.0)
 
-        let expectedEvents: [FSEventStream.CallbackEvent] = [
+        let expectedEvents: [FSEvent] = [
             .init(path: tmpURL.path, flags: [.itemCreated, .itemIsDir, .ownEvent], id: 0),
             .init(path: newURL.path, flags: [.itemCreated, .itemIsFile, .ownEvent], id: 0)
         ]

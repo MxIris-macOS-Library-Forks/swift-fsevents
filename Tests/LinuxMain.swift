@@ -1,7 +1,7 @@
 import XCTest
 
-import RDFSEventsTests
+import FSEventsTests
 
 var tests = [XCTestCaseEntry]()
-tests += RDFSEventsTests.allTests()
+tests += FSEventsTests.allTests()
 XCTMain(tests)
